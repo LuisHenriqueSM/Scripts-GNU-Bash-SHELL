@@ -1,0 +1,56 @@
+#!/bin/bash
+
+DIRE=/home/cbers/edu/auto
+at -l > $DIRE/auto.txt
+
+rm -rf $DIRE/aquaprog
+rm -rf $DIRE/nppprog
+
+
+NLIN=`more $DIRE/auto.txt |wc -l`
+
+
+for ((i=$NLIN; i>=1; i--))
+do
+LINHA=`more $DIRE/auto.txt |head -1`
+sed -i 1d $DIRE/auto.txt
+DATE=`echo $LINHA |awk -F" " '{print ($2)}'`
+HORAE=`echo $LINHA |awk -F" " '{print ($3)}' |awk -F":" '{print ($1)}'`
+MINE=`echo $LINHA |awk -F" " '{print ($3)}' |awk -F":" '{print ($2)}'`
+echo " "
+echo "....................................."
+echo $DATE-$HORAE-$MINE
+echo "....................................."
+
+
+echo "POR FAVOR, ESCOLHA O SATELITE PARA ENVIO AUTOMATICO DA PASSAGEM ACIMA: (AQUA ou NPP)"
+read SATE
+
+echo " "
+echo "POR FAVOR, DIGITE QUANTOS MINUTOS RESTAM PARA INICIAR O ENVIO A PARTIR DE AGORA ("`date`") :"
+read TEMP1
+
+TEMP=$(($TEMP1 * 60));
+echo $TEMP
+
+		case $SATE  in
+		'AQUA')
+
+		#at -f $DIRE/tarefaaqua $HORAE:$MINE		
+		/home/cbers/edu/auto/./auto2.sh $TEMP | at $HORAE:$MINE &
+		echo "NESTE HORARIO: "$DATE-$HORAE:$MINE" SERA ENVIADO AQUA"
+		echo $DATE-$HORAE-$MINE >> $DIRE/aquaprog
+		;;
+		'NPP')
+
+		#at -f $DIRE/tarefanpp $HORAE:$MINE
+		/home/cbers/edu/auto/./auto3.sh $TEMP | at $HORAE:$MINE &
+                echo "NESTE HORARIO: "$DATE-$HORAE:$MINE" SERA ENVIADO NPP"
+		echo $DATE-$HORAE-$MINE >> $DIRE/nppprog
+		;;
+		esac
+
+done
+
+exit
+

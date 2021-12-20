@@ -13,7 +13,7 @@ INICIO=`date +%d/%m==%H:%M:%S`
 
 #enviando dado para SIR21
 /home/cbers/ncftp-3.2.5/bin/./ncftpput -R -E -u user -p passwd 10.163.155.191 /dados $1
-#/home/cbers/ncftp-3.2.5/bin/./ncftpput -R -E -u transfoper -p cba.inpe 10.163.155.191 /dados $1.md5_cba
+
 
 #registrando horario de fim da transferencia
 echo $1 "- INICIO -" $INICIO  "- FIM -" `date +%d/%m==%H:%M:%S`  >> $EMPACOTADIR/enviados.txt

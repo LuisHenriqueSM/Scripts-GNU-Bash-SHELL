@@ -7,7 +7,7 @@ EMPACOTADIR=/landsat8/logs
 INICIO=`date +%d/%m==%H:%M:%S`
 
 
-/usr/bin/./ncftpput -R -E -u transfoper -p cba.inpe 10.163.155.191 /dados $1
+/usr/bin/./ncftpput -R -E -u user -p passwd 10.163.155.191 /dados $1
 
 
 echo $1 >> /home/cbers/fdt.log

@@ -26,8 +26,8 @@ $opt_h ||= "landsat.usgs.gov";
 #
 # Configurable parameters
 #
-my $username = "ergcuiaba";		# replace with your login username
-my $password = "cuiabaerg2014";		# replace with your login password
+my $username = "user";		# replace with your login username
+my $password = "passwd";		# replace with your login password
 my $station_name = "CUB";	# replace with station name, e.g. ASA, JSA, etc.
 # Use this for uploading post-pass reports
 my $upload = "/exchange_cache/validatepostpassreport.php";
